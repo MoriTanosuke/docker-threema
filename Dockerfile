@@ -1,12 +1,11 @@
-FROM	node:7.5.0
+FROM alpine as builder
 
-ENV	THREEMA_VERSION=v1.1.0
+RUN apk add -U curl && \
+    curl -Lq -o threema-web.tgz "https://github.com/threema-ch/threema-web/releases/download/v2.1.2/threema-web-2.1.2-gh.tar.gz"
 
-RUN	git clone --branch ${THREEMA_VERSION} https://github.com/threema-ch/threema-web.git
-# add local config
-COPY	config.ts threema-web/src/config.ts
-# build release tarball
-RUN	cd threema-web && npm install
+FROM nginx:mainline-alpine
 
-WORKDIR	threema-web
-CMD	["npm", "run", "serve:live"]
+COPY --from=builder /threema-web.tgz .
+RUN tar xzf threema-web.tgz && rm threema-web.tgz && \
+    rm -rf /usr/share/nginx/html && \
+    mv threema-web-2.1.2-gh /usr/share/nginx/html
