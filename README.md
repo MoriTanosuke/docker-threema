@@ -1,6 +1,8 @@
 **Attention** This *Dockerfile* is **NOT MEANT FOR PRODUCTION** so don't use it 
 for critical communication that you need to be secure!
 
+[![](https://images.microbadger.com/badges/version/moritanosuke/docker-threema:development.svg)](https://microbadger.com/images/moritanosuke/docker-threema:development) [![](https://images.microbadger.com/badges/image/moritanosuke/docker-threema:development.svg)](https://microbadger.com/images/moritanosuke/docker-threema:development)
+
 [Threema announced a desktop client][0] and I wanted to have a way to test it on
 my local machine. As I'm a big fan of [Docker][1] I created this simple *Dockerfile*
 which installs *v2.1.2-gh* using [nginx][2].
